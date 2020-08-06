@@ -1,6 +1,9 @@
-from flask import Flask, request, redirect, make_response
+from flask import Flask, request, redirect, make_response, render_template
 
 app = Flask(__name__)
+
+# creamos una lista de pruebas para todo.
+todos = ['TODO 1', 'TODO 2', 'TODO 3']
 
 #creamos una nueva ruta raiz
 @app.route('/')
@@ -19,4 +22,11 @@ def index():
 def hello():
     #obtenemos la ip del usuario desde la cookie
     user_ip = request.cookies.get('user_ip')
-    return f'Hello World Flask, tu IP es {user_ip}'
+# creamos un contexto para las variables del template
+    context = {
+        'user_ip':user_ip,
+        'todos':todos
+    }
+
+    # rendereamos el template con las variables que se requieran desde le contexto
+    return render_template('hello.html', **context)
