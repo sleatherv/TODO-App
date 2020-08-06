@@ -3,7 +3,7 @@ from flask import Flask, request, redirect, make_response, render_template
 app = Flask(__name__)
 
 # creamos una lista de pruebas para todo.
-todos = ['TODO 1', 'TODO 2', 'TODO 3']
+todos = ['Buy Coffee', 'Send sale order', 'Get video for webpage']
 
 #creamos una nueva ruta raiz
 @app.route('/')
@@ -12,7 +12,7 @@ def index():
     user_ip = request.remote_addr
 #   usamos make_reponse y redirect a hello
     response = make_response(redirect('/hello'))
-    #agregamos la ip del usuario a una cookie 
+    #agregamos la ip del usuario a una cookie
     response.set_cookie('user_ip', user_ip)
     #regresamos la respuesta de flask
     return response
@@ -28,5 +28,5 @@ def hello():
         'todos':todos
     }
 
-    # rendereamos el template con las variables que se requieran desde le contexto
+    # rendereamos el template con las variables que se requieran desde el contexto
     return render_template('hello.html', **context)
