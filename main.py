@@ -1,6 +1,11 @@
 from flask import Flask, request, redirect, make_response, render_template
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
+
+# Inicializamos bootstrap
+bootstrap = Bootstrap(app)
+
 
 # creamos una lista de pruebas para todo.
 todos = ['Buy Coffee', 'Send sale order', 'Get video for webpage']
@@ -12,7 +17,7 @@ def not_found(error):
 
 
 @app.errorhandler(500)
-def not_found(error):
+def server_error(error):
     return render_template('500.html', error=error)
 
 

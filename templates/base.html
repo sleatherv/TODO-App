@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'bootstrap/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}ToDoApp |{% endblock%}</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+{% block head %}
+{{super()}}
+<title>{% block title %}ToDoApp |{% endblock%}</title>
+<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+{% endblock %}
+
 </head>
-
-<body>
-    <header>
-        {% include 'navbar.html' %}
-    </header>
-    {% block content %}
-    {% endblock%}
-</body>
-
-</html>
+{% block body %}
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock %}
+{% block content %}
+{% endblock%}
+{% endblock %}
