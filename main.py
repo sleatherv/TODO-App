@@ -5,6 +5,17 @@ app = Flask(__name__)
 # creamos una lista de pruebas para todo.
 todos = ['Buy Coffee', 'Send sale order', 'Get video for webpage']
 
+# manejando errores
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html', error=error)
+
+
+@app.errorhandler(500)
+def not_found(error):
+    return render_template('500.html', error=error)
+
+
 #creamos una nueva ruta raiz
 @app.route('/')
 def index():
