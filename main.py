@@ -1,5 +1,9 @@
 from flask import Flask, request, redirect, make_response, render_template, session
 from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
+from wtforms.fields import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired
+
 
 app = Flask(__name__)
 
@@ -9,7 +13,14 @@ app.config['SECRET_KEY'] = 'SUPER SECRETO'
 
 
 # creamos una lista de pruebas para todo.
-todos = ['Buy Coffee', 'Send sale order', 'Get video for webpage']
+todos = ['Buy Coffee', 'Send sale order', 'Get video for webpage']\
+
+# haciendo el formulario de Login
+class LoginForm(FlaskForm):
+    username = StringField('User', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Send')
+
 
 # manejando errores
 @app.errorhandler(404)
@@ -40,10 +51,12 @@ def index():
 def hello():
     #obtenemos la ip del usuario desde la cookie
     user_ip = session.get('user_ip')
+    login_form = LoginForm()
 # creamos un contexto para las variables del template
     context = {
         'user_ip':user_ip,
-        'todos':todos
+        'todos':todos,
+        'login_form': login_form
     }
 
     # rendereamos el template con las variables que se requieran desde el contexto
