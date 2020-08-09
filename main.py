@@ -1,6 +1,7 @@
-from flask import Flask, request, redirect, make_response, render_template, session
+from flask import Flask, request, redirect, make_response, render_template, session, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
+from flask_wtf.csrf import CSRFProtect
 from wtforms.fields import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
 
@@ -9,6 +10,7 @@ app = Flask(__name__)
 
 # Inicializamos bootstrap
 bootstrap = Bootstrap(app)
+# csrf = CSRFProtect(app)
 app.config['SECRET_KEY'] = 'SUPER SECRETO'
 
 
@@ -47,17 +49,23 @@ def index():
     return response
 
 
-@app.route('/hello')
+@app.route('/hello', methods=['GET', 'POST'])
 def hello():
     #obtenemos la ip del usuario desde la cookie
     user_ip = session.get('user_ip')
     login_form = LoginForm()
+    username = session.get('username') #obtenemos el username de la sesion
 # creamos un contexto para las variables del template
     context = {
         'user_ip':user_ip,
         'todos':todos,
-        'login_form': login_form
+        'login_form': login_form,
+        'username': username
     }
+    if login_form.validate_on_submit():
+        username = login_form.username.data #obtenemos el username
+        session['username']= username #lo guardamos en la sesion para enviarlo al contexto
 
+        return redirect(url_for('index'))
     # rendereamos el template con las variables que se requieran desde el contexto
     return render_template('hello.html', **context)
