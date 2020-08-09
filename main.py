@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.csrf import CSRFProtect
 from wtforms.fields import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
-
+import unittest
 
 app = Flask(__name__)
 
@@ -23,6 +23,12 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Send')
 
+
+# Creando un nuevo comando para test
+@app.cli.command()
+def test():
+    test = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner().run(test)
 
 # manejando errores
 @app.errorhandler(404)
