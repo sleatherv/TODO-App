@@ -1,27 +1,12 @@
-from flask import Flask, request, redirect, make_response, render_template, session, url_for, flash
+from flask import request, redirect, make_response, render_template, session, url_for, flash
 from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
-from flask_wtf.csrf import CSRFProtect
-from wtforms.fields import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
 import unittest
+from app import create_app
+from app.forms import LoginForm
 
-app = Flask(__name__)
-
-# Inicializamos bootstrap
-bootstrap = Bootstrap(app)
-# csrf = CSRFProtect(app)
-app.config['SECRET_KEY'] = 'SUPER SECRETO'
-
-
+app = create_app()
 # creamos una lista de pruebas para todo.
 todos = ['Buy Coffee', 'Send sale order', 'Get video for webpage']\
-
-# haciendo el formulario de Login
-class LoginForm(FlaskForm):
-    username = StringField('User', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Send')
 
 
 # Creando un nuevo comando para test
