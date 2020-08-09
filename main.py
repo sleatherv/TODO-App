@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, make_response, render_template, session, url_for
+from flask import Flask, request, redirect, make_response, render_template, session, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from flask_wtf.csrf import CSRFProtect
@@ -66,6 +66,7 @@ def hello():
         username = login_form.username.data #obtenemos el username
         session['username']= username #lo guardamos en la sesion para enviarlo al contexto
 
+        flash('Successfully Registered')
         return redirect(url_for('index'))
     # rendereamos el template con las variables que se requieran desde el contexto
     return render_template('hello.html', **context)
