@@ -44,20 +44,11 @@ def index():
 def hello():
     #obtenemos la ip del usuario desde la cookie
     user_ip = session.get('user_ip')
-    login_form = LoginForm()
     username = session.get('username') #obtenemos el username de la sesion
 # creamos un contexto para las variables del template
     context = {
         'user_ip':user_ip,
         'todos':todos,
-        'login_form': login_form,
         'username': username
     }
-    if login_form.validate_on_submit():
-        username = login_form.username.data #obtenemos el username
-        session['username']= username #lo guardamos en la sesion para enviarlo al contexto
-
-        flash('Successfully Registered')
-        return redirect(url_for('index'))
-    # rendereamos el template con las variables que se requieran desde el contexto
     return render_template('hello.html', **context)
