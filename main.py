@@ -1,6 +1,6 @@
 from flask import request, redirect, make_response, render_template, session, url_for, flash
 from flask_bootstrap import Bootstrap
-from flask_login import login_required
+from flask_login import login_required, current_user
 import unittest
 from app import create_app
 from app.forms import LoginForm
@@ -31,8 +31,7 @@ def index():
     user_ip = request.remote_addr
 #   usamos make_reponse y redirect a hello
     response = make_response(redirect('/hello'))
-    #agregamos la ip del usuario a una cookie
-    # response.set_cookie('user_ip', user_ip)
+    #agregamos la ip del usuario a una cookie    # response.set_cookie('user_ip', user_ip)
     session['user_ip'] = user_ip #guardamos la variable en una sesion
     #regresamos la respuesta de flask
     return response
@@ -43,7 +42,8 @@ def index():
 def hello():
     #obtenemos la ip del usuario desde la cookie
     user_ip = session.get('user_ip')
-    username = session.get('username') #obtenemos el username de la sesion
+    username = current_user.id #ahora viene desde el login_form
+    print(username)
 # creamos un contexto para las variables del template
     context = {
         'user_ip':user_ip,

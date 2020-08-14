@@ -14,9 +14,9 @@ def load_user(username):
     return UserModel.query(username)
 
 
-@login_manager.user_loader
-def load_users(user_id):
-    return
+# @login_manager.user_loader
+# def load_users(user_id):
+#     return
 
 
 def create_app():
