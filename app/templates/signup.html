@@ -6,8 +6,20 @@ SignUp
 {% endblock%}
 
 {% block content %}
-<h1>Register new account</h1>
 <div class="container">
-    {{ wtf.quick_form(signup_form) }}
+    <h1>Register your new account</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="{{ url_for('static', filename='images/lime-list-is-empty.png') }}" alt="login-img"
+                class="img-responsive">
+        </div>
+        <div class="col-lg-6">
+            {{ wtf.quick_form(signup_form) }}
+        </div>
+    </div>
+
 </div>
 {% endblock %}

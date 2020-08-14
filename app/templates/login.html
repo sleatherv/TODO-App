@@ -7,6 +7,16 @@ Login
 
 {% block content %}
 <div class="container">
-    {{ wtf.quick_form(login_form) }}
+    <br>
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="{{ url_for('static', filename='images/lime-list-is-empty.png') }}" alt="login-img"
+                class="img-responsive">
+        </div>
+        <div class="col-lg-6">
+            {{ wtf.quick_form(login_form) }}
+        </div>
+    </div>
+
 </div>
 {% endblock %}
