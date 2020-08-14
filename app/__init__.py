@@ -14,11 +14,6 @@ def load_user(username):
     return UserModel.query(username)
 
 
-# @login_manager.user_loader
-# def load_users(user_id):
-#     return
-
-
 def create_app():
     app = Flask(__name__)
     bootstrap = Bootstrap(app)
