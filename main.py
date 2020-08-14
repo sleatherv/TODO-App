@@ -3,8 +3,8 @@ from flask_bootstrap import Bootstrap
 from flask_login import login_required, current_user
 import unittest
 from app import create_app
-from app.forms import LoginForm
-from app.firestore_service import get_users, get_todos
+from app.forms import TodoForm
+from app.firestore_service import get_users, get_todos, put_todo
 
 app = create_app()
 # Creando un nuevo comando para test
@@ -43,16 +43,17 @@ def hello():
     #obtenemos la ip del usuario desde la cookie
     user_ip = session.get('user_ip')
     username = current_user.id #ahora viene desde el login_form
-    print(username)
+    todo_form = TodoForm()
 # creamos un contexto para las variables del template
     context = {
         'user_ip':user_ip,
         'todos':get_todos(user_id=username),
-        'username': username
+        'username': username,
+        'todo_form': todo_form
     }
 
-    users = get_users()
-    for user in users:
-        print(f'user= {user.id}')
+    if todo_form.validate_on_submit():
+        put_todo(user_id=username, description=todo_form.description.data)
+        flash('Your task was created successfully')
 
     return render_template('hello.html', **context)

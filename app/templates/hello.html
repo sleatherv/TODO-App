@@ -17,7 +17,10 @@ Welcome
 {% else %}
 <a href="{{ url_for('index') }}"> Go to index</a>
 {% endif %}
-
+<div class="container">
+    <h2>Create Task</h2>
+    {{ wtf.quick_form(todo_form) }}
+</div>
 
 {% for todo in todos %}
 {{macro.render_todo(todo.to_dict().description)}}
