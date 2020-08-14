@@ -1,12 +1,12 @@
 from flask import request, redirect, make_response, render_template, session, url_for, flash
 from flask_bootstrap import Bootstrap
+from flask_login import login_required
 import unittest
 from app import create_app
 from app.forms import LoginForm
 from app.firestore_service import get_users, get_todos
 
 app = create_app()
-
 # Creando un nuevo comando para test
 @app.cli.command()
 def test():
@@ -39,6 +39,7 @@ def index():
 
 
 @app.route('/hello', methods=['GET', 'POST'])
+@login_required #importante el orden en que se coloca el login required
 def hello():
     #obtenemos la ip del usuario desde la cookie
     user_ip = session.get('user_ip')
