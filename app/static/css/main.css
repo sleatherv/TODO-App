@@ -2,6 +2,10 @@ html * {
     font-family: sans-serif;
 }
 
+.navbar-brand {
+    padding: 5px;
+}
+
 img {
     max-width: 30px;
 }
