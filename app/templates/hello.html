@@ -23,6 +23,6 @@ Welcome
 </div>
 
 {% for todo in todos %}
-{{macro.render_todo(todo.to_dict().description)}}
+{{macro.render_todo(todo, delete_form)}}
 {%endfor%}
 {% endblock%}
