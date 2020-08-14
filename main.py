@@ -3,11 +3,9 @@ from flask_bootstrap import Bootstrap
 import unittest
 from app import create_app
 from app.forms import LoginForm
+from app.firestore_service import get_users, get_todos
 
 app = create_app()
-# creamos una lista de pruebas para todo.
-todos = ['Buy Coffee', 'Send sale order', 'Get video for webpage']\
-
 
 # Creando un nuevo comando para test
 @app.cli.command()
@@ -48,7 +46,12 @@ def hello():
 # creamos un contexto para las variables del template
     context = {
         'user_ip':user_ip,
-        'todos':todos,
+        'todos':get_todos(user_id=username),
         'username': username
     }
+
+    users = get_users()
+    for user in users:
+        print(f'user= {user.id}')
+
     return render_template('hello.html', **context)

@@ -20,6 +20,6 @@ Welcome
 
 
 {% for todo in todos %}
-{{macro.render_todo(todo)}}
+{{macro.render_todo(todo.to_dict().description)}}
 {%endfor%}
 {% endblock%}
