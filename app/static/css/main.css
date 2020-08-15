@@ -54,3 +54,18 @@ html * {
 .label {
     font-size: 14px;
 }
+
+@media (max-width: 600px) {
+    .label {
+        font-size: 12px;
+    }
+    .taks-list {
+        font-size: 12px;
+    }
+    #delete, #update {
+        font-size: 12px;
+    }
+    .head-task h4 {
+        font-size: 12px;
+    }
+}

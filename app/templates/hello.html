@@ -9,15 +9,10 @@ Welcome
 {% endblock%}
 
 {% block content %}
-<div class="container">
+<div class="container text-center">
     {% if username %}
     <h1>Welcome, {{ username | capitalize }}</h1>
     {% endif  %}
-    <!-- {% if user_ip %}
-    <h4>Your IP is {{user_ip}}</h4>
-    {% else %}
-    <a href="{{ url_for('index') }}"> Go to index</a>
-    {% endif %} -->
 </div>
 <div class="container text-center">
     <h2>Create Task</h2>
@@ -30,16 +25,16 @@ Welcome
     </div>
     <br>
     <div class="row head-task text-center">
-        <div class=" col-lg-6">
+        <div class=" col-lg-6 col-xs-3">
             <h4>Description</h4>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-2 col-xs-3">
             <h4>Status</h4>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-2 col-xs-3">
             <h4>Update?</h4>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-2 col-xs-3">
             <h4>Delete?</h4>
         </div>
     </div>
